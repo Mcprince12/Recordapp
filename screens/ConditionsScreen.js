@@ -17,17 +17,24 @@ export default class ConditionsScreen extends React.Component
 
     updateInfo = () =>
     {
-        db.collection( 'conditions' ).doc().update( {
-            name:this.state.info,
+        console.log(this.state.info)
+        db.collection( 'condition' ).add( {
+            name: this.state.info,
+            date:firebase.firestore.FieldValue.serverTimestamp(),
         } )
-        
+        this.setState( {
+            name: '',
+            date:'',
+        } )
+        alert( 'Successfully Submitted' );
     }
 
     render ()
     {
         return (
             <View style={styles.container}>
-                <AppHeader/>
+                <AppHeader />
+                <View>
                 <TouchableOpacity
                     style={styles.BackButton}
                     onPress={
@@ -40,14 +47,18 @@ export default class ConditionsScreen extends React.Component
                     <Text style={styles.BackButtonText}>
                         Back
                     </Text>
-                </TouchableOpacity>
+                    </TouchableOpacity>
+                </View>
+                <View>
                 <Text style={styles.HeaderText}>
                     Input Information in the Box Below:
                 </Text>
                 <Image
                     style={styles.img}
                     source={require('../assets/condition.jpeg')}
-                />
+                    />
+                </View>
+                <View>
                 <TextInput
                     style={styles.Box}
                     placeholder="Write any Condition Here and submit"
@@ -59,17 +70,23 @@ export default class ConditionsScreen extends React.Component
                              })  
                         }
                     }
-                />
-                <TouchableOpacity
-                    style={styles.submitButton}
-                    onPress={
-                        this.updateInfo()
-                    }
-                >
-                    <Text style={styles.submitButtonText}>
-                        Submit
-                    </Text>
-                </TouchableOpacity>
+                        value={this.state.info}
+                    />
+                    <TouchableOpacity
+                        style={styles.submitButton}
+                        onPress={
+                           ()=>{
+                            this.updateInfo()
+                           } 
+                        }
+                        >
+                        <Text style={styles.submitButtonText}>
+                            Submit
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+                <View>
+                    </View>
                 <Text style={styles.bottomText}>
                     *Note: If you have multiple conditions, submit them one by one.
                 </Text>
@@ -118,7 +135,7 @@ const styles = StyleSheet.create( {
         width: 200,
         height: 80,
         marginTop: 15,
-        marginLeft:625,
+        marginLeft:700,
     },
     submitButtonText: {
         textAlign: 'center',
@@ -128,7 +145,7 @@ const styles = StyleSheet.create( {
     },
     bottomText: {
         fontSize: 20,
-        marginLeft: 450,
+        marginLeft: 500,
         margin:50,
     },
     img: {

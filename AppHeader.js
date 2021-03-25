@@ -13,7 +13,7 @@ class AppHeader extends React.Component {
 
 const styles = StyleSheet.create({
   textContainer: {
-    backgroundColor: 'fuschia',
+    backgroundColor: 'indigo',
   },
   text: {
     color: 'white',

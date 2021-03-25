@@ -9,10 +9,12 @@ export default class WelcomeScreen extends React.Component
         return (
             <View style={styles.cont}>
                 <AppHeader />
+                <View>
                 <Text style={styles.HeaderText}>
                     Welcome! Please Click any Button to Put in Information!
                 </Text>
-
+                </View>
+                <View>
                 <TouchableOpacity
                     style={styles.button}
                     onPress={
@@ -23,10 +25,12 @@ export default class WelcomeScreen extends React.Component
                     }
                 >
                     <Text style={styles.buttonText}>
-                        Identification
+                            Identification
                     </Text>
+                    
+                
                 </TouchableOpacity>
-
+</View><View>
                 <TouchableOpacity
                     style={styles.button}
                     onPress={
@@ -40,7 +44,7 @@ export default class WelcomeScreen extends React.Component
                         Diseases/Long Term Conditions
                     </Text>
                 </TouchableOpacity>
-
+</View><View>
                 <TouchableOpacity
                     style={styles.button}
                     onPress={
@@ -54,7 +58,7 @@ export default class WelcomeScreen extends React.Component
                         Vaccines
                     </Text>
                 </TouchableOpacity>
-
+</View><View>
                 <TouchableOpacity
                     style={styles.button}
                     onPress={
@@ -68,7 +72,7 @@ export default class WelcomeScreen extends React.Component
                         Medication History
                     </Text>
                 </TouchableOpacity>
-
+</View><View>
                 <TouchableOpacity
                     style={[styles.button, {backgroundColor:'blue'}]}
                     onPress={
@@ -81,7 +85,8 @@ export default class WelcomeScreen extends React.Component
                     <Text style={styles.buttonText}>
                         Your Final Record
                     </Text>
-                </TouchableOpacity>
+                    </TouchableOpacity>
+                    </View>
             </View>
         )
     }
