@@ -14,9 +14,37 @@ export default class WelcomeScreen extends React.Component
                     Welcome! Please Click any Button to Put in Information!
                 </Text>
                 </View>
+                <TouchableOpacity
+                    style={{
+                        backgroundColor: 'beige',
+                        alignItems: 'center',
+                        borderRadius: 20,
+                        width: 100,
+                        height: 50,
+                        marginTop:50,
+                    }}
+
+                    onPress={
+                        () =>
+                        {
+                            this.props.navigation.navigate('AboutUsScreen')
+                        }
+                    }
+                >
+                    <Text
+                        style={{
+                            fontWeight: 'bold',
+                            textAlign: 'center',
+                            fontSize: '16',
+                            marginTop:12.5,
+                        }}
+                    >
+                        About Us
+                    </Text>
+                </TouchableOpacity>
                 <View>
                 <TouchableOpacity
-                    style={styles.button}
+                    style={[styles.button, {marginTop:50}]}
                     onPress={
                         () =>
                         {

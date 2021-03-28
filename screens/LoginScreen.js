@@ -1,9 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Modal, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Modal, KeyboardAvoidingView } from 'react-native';
+import {ScrollView} from 'react-native-gesture-handler'
 import firebase from 'firebase';
 import db from '../config';
 import AppHeader from '../AppHeader';
 import WelcomeScreen from './WelcomeScreen';
+
 
 export default class LoginScreen extends React.Component
 {
@@ -24,16 +26,20 @@ export default class LoginScreen extends React.Component
     
     showModal = () =>
     {
+        return(
+   
+   
         <Modal
             animationType="fade"
             transparent={true}
             visible={this.state.isRegisterVisible}
         >
-            <View style={styles.modalContainer}>
-                <ScrollView style={{width:'100%'}}>
+                 <View style={styles.modalContainer}>
+ <ScrollView style={{width:'100%'}}>
+            
                     <KeyboardAvoidingView style={styles.KeyboardAvoidingView}>
                         <Text style={styles.modalTitle}>
-                            Resgistration
+                            Registration
                         </Text>
                         <TextInput
                             style={styles.formTextInput}
@@ -44,7 +50,17 @@ export default class LoginScreen extends React.Component
                                     firstName:text,
                                 })
                             }}
-                        />
+                            />
+                            <TextInput
+                               style={styles.formTextInput}
+                               placeholder={"Last Name"}
+                               maxLength={8}
+                               onChangeText={(text)=>{
+                                   this.setState({
+                                       lastName:text,
+                                   })
+                               }}
+                            />
                          <TextInput
                             style={styles.formTextInput}
                             placeholder={"abc@example.com"}
@@ -52,16 +68,6 @@ export default class LoginScreen extends React.Component
                             onChangeText={(text)=>{
                                 this.setState({
                                     username:text,
-                                })
-                            }}
-                        />
-                         <TextInput
-                            style={styles.formTextInput}
-                            placeholder={"Last Name"}
-                            maxLength={8}
-                            onChangeText={(text)=>{
-                                this.setState({
-                                    lastName:text,
                                 })
                             }}
                         />
@@ -111,7 +117,7 @@ export default class LoginScreen extends React.Component
                                 onPress={
                                     () =>
                                     {
-                                        this.userSignUp(this.state.username, this.state.password)
+                                        this.userSignUp(this.state.username, this.state.password, this.state.confirmedPassword)
                                     }
                                 }
                             >
@@ -137,9 +143,13 @@ export default class LoginScreen extends React.Component
                             </TouchableOpacity>
                         </View>
                     </KeyboardAvoidingView>
-                </ScrollView>
-            </View>
-        </Modal>
+                     </ScrollView>
+ </View>
+           
+                </Modal>
+           
+           
+        )
     }
     userLogin = (username, password) =>{
     firebase.auth().signInWithEmailAndPassword(username, password)
@@ -153,8 +163,8 @@ export default class LoginScreen extends React.Component
     } )
     }
     
-    userSignUp = (username, password, confirmPassword) =>{
-    if(password!==confirmPassword){
+    userSignUp = (username, password, confirmedPassword) =>{
+    if(password!==confirmedPassword){
         return alert("Password does not match");
     } else {
         firebase.auth().createUserWithEmailAndPassword(username, password)
@@ -187,6 +197,7 @@ export default class LoginScreen extends React.Component
     render ()
     {
         return (
+            <ScrollView>
             <View style={styles.container}>
                 <AppHeader />
                 <View style={{justifyContent:'center', alignItems:'center'}}>
@@ -234,6 +245,9 @@ export default class LoginScreen extends React.Component
                             () =>
                             {
                                 this.userLogin( this.state.username, this.state.password )
+                                
+                            
+                            
                             }
                         }
                     >
@@ -255,7 +269,8 @@ export default class LoginScreen extends React.Component
                         </Text>
                     </TouchableOpacity>
                 </View>
-            </View>
+                </View>
+                </ScrollView>
         )
     }
 }
@@ -303,7 +318,7 @@ const styles = StyleSheet.create( {
         borderRadius: 20,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: "black",
+        backgroundColor: "white",
         marginRight: 30,
         marginLeft: 30,
         marginTop: 80,
