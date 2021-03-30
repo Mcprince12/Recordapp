@@ -12,6 +12,7 @@ export default class ConditionsScreen extends React.Component
         this.state = {
             info: '',
             date: '',
+            username: firebase.auth().currentUser.email,
         }
     }
 
@@ -20,11 +21,13 @@ export default class ConditionsScreen extends React.Component
         console.log(this.state.info)
         db.collection( 'condition' ).add( {
             name: this.state.info,
-            date:firebase.firestore.FieldValue.serverTimestamp(),
+            date: firebase.firestore.FieldValue.serverTimestamp(),
+            username: this.state.username,
         } )
         this.setState( {
             name: '',
-            date:'',
+            date: '',
+            username:'',
         } )
         alert( 'Successfully Submitted' );
     }
