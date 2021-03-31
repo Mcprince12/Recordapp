@@ -12,6 +12,7 @@ export default class MedicationHistoryScreen extends React.Component
         this.state = {
             info: '',
             date: '',
+            username: firebase.auth().currentUser.email,
         }
     }
 
@@ -19,12 +20,14 @@ export default class MedicationHistoryScreen extends React.Component
     {
         console.log(this.state.info)
         db.collection( 'history' ).add( {
-            name: this.state.info,
-            date:firebase.firestore.FieldValue.serverTimestamp(),
+            name3: this.state.info,
+            date3: firebase.firestore.FieldValue.serverTimestamp(),
+            username:this.state.username,
         } )
         this.setState( {
             name: '',
-            date:'',
+            date: '',
+            username: '',
         } )
         alert( 'Successfully Submitted' );
     }
@@ -72,6 +75,7 @@ export default class MedicationHistoryScreen extends React.Component
                     }
                         value={this.state.info}
                         multiline={true}
+                        
                     />
                     <TouchableOpacity
                         style={styles.submitButton}

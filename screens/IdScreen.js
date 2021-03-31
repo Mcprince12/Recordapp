@@ -12,6 +12,7 @@ export default class IdScreen extends React.Component
         this.state = {
             info: '',
             date: '',
+            username: firebase.auth().currentUser.email,
         }
     }
 
@@ -19,12 +20,14 @@ export default class IdScreen extends React.Component
     {
         console.log(this.state.info)
         db.collection( 'id' ).add( {
-            name: this.state.info,
-            date:firebase.firestore.FieldValue.serverTimestamp(),
+            name1: this.state.info,
+            date1: firebase.firestore.FieldValue.serverTimestamp(),
+            username:this.state.username,
         } )
         this.setState( {
             name: '',
-            date:'',
+            date: '',
+            username:'',
         } )
         alert( 'Successfully Submitted' );
     }
